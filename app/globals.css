@@ -1,26 +1,197 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand Colors - Authentic & Warm */
+  --brand-red: #d24d3e;
+  /* Hero Background */
+  --brand-gray: #FAF7F0;
+  /* Warm White for Body */
+  --brand-yellow: #FCD116;
+  /* Colombian Yellow */
+
+  /* Palette for Balanced Theme */
+  --surface: #FFFFFF;
+  --text-main: #1F2937;
+  /* Charcoal */
+  --text-muted: #4B5563;
+  --text-on-red: #FFFFFF;
+
+  /* Colombian Accent Colors */
+  --colombian-yellow: #FCD116;
+  --colombian-blue: #003893;
+  --colombian-red: #CE1126;
+
+  /* Earthy Tones */
+  --terracotta: #C85A3E;
+  --coffee-brown: #4A3728;
+
+  /* Sophisticated Palette */
+  --primary: #FCD116;
+  --secondary: #003893;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--brand-gray);
+  color: var(--text-main);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--coffee-brown);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brand-yellow);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: white;
+}
+
+@layer components {
+
+  /* Sophisticated CSS Pattern - Sombrero Vueltiao inspired */
+  /* Pattern removed for clean look */
+  .colombian-weave {
+    background-color: var(--brand-gray);
+    background-image: none;
+  }
+
+  .bg-pattern-dots {
+    background-image: radial-gradient(#C85A3E 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  /* Premium Card Style - Solid White for Contrast */
+  .elegant-card {
+    @apply bg-white rounded-xl p-8 transition-all duration-500;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+    /* Stronger shadow for depth */
+    border: none;
+    /* Clean look */
+  }
+
+  /* Text inside cards should be dark */
+  .elegant-card h1,
+  .elegant-card h2,
+  .elegant-card h3,
+  .elegant-card h4,
+  .elegant-card h5,
+  .elegant-card h6 {
+    color: var(--coffee-brown);
+  }
+
+  .elegant-card p,
+  .elegant-card li,
+  .elegant-card span {
+    color: var(--text-main);
+  }
+
+  .elegant-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Refined Buttons */
+  .btn-primary {
+    @apply px-8 py-3 font-medium rounded-lg transition-all duration-300 relative overflow-hidden;
+    background: var(--brand-yellow);
+    color: var(--coffee-brown);
+    box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2);
+    border: 2px solid var(--brand-yellow);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    background: white;
+    border-color: white;
+    color: var(--brand-gray);
+  }
+
+  .btn-secondary {
+    @apply px-8 py-3 font-medium rounded-lg border-2 transition-all duration-300;
+    background: transparent;
+    border-color: white;
+    color: white;
+  }
+
+  .btn-secondary:hover {
+    background: white;
+    color: var(--brand-gray);
+  }
+
+  /* Typography Utilities */
+  .section-header {
+    @apply text-4xl md:text-5xl font-bold text-center mb-4 text-coffee-brown;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-center text-gray-600 max-w-2xl mx-auto mb-16 font-light;
+  }
+
+  .decorative-line {
+    @apply w-16 h-1 mx-auto mb-8;
+    background: linear-gradient(to right, var(--colombian-yellow), var(--colombian-blue), var(--colombian-red));
+  }
+
+  /* Glass Effect */
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
