@@ -1,10 +1,33 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 export default function Hero() {
+    const [showFade, setShowFade] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const hero = document.getElementById('inicio');
+            if (!hero) return;
+            const scrollY = window.scrollY;
+            const trigger = hero.offsetHeight * 0.35; // start fade when scrolling past ~35% of hero
+            setShowFade(scrollY > trigger);
+        };
+
+        handleScroll();
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     return (
         <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden colombian-weave" style={{ backgroundColor: 'var(--brand-red)' }}>
             {/* Gradient Overlay removed */}
             {/* <div className="absolute inset-0 bg-gradient-to-b from-white/50 to-transparent pointer-events-none"></div> */}
+            {/* Fade into next section when transitioning out */}
+            <div
+                className={`pointer-events-none absolute bottom-0 left-0 w-full h-28 bg-gradient-to-b from-transparent to-brand-gray transition-opacity duration-500 ${showFade ? 'opacity-100' : 'opacity-0'
+                    }`}
+            ></div>
 
             <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 text-center">
                 {/* Main heading */}

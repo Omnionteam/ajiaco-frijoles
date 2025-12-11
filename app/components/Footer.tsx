@@ -2,9 +2,10 @@
 
 export default function Footer() {
     return (
-        <footer className="bg-charcoal text-white pt-24 pb-12 relative overflow-hidden">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 colombian-weave opacity-5 pointer-events-none"></div>
+        <footer
+            className="text-white pt-24 pb-12 relative overflow-hidden"
+            style={{ backgroundColor: '#d24d3e' }}
+        >
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
                 <div className="grid md:grid-cols-4 gap-16 mb-20">
@@ -52,11 +53,11 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="border-t border-gray-800 pt-12 flex flex-col md:flex-row justify-between items-center gap-6">
-                    <p className="text-gray-500 text-sm">
+                <div className="border-t border-white/20 pt-12 flex flex-col md:flex-row justify-between items-center gap-6">
+                    <p className="text-white/80 text-sm">
                         © 2025 Ajiaco & Frijoles. Todos los derechos reservados.
                     </p>
-                    <p className="text-gray-500 text-xs">
+                    <p className="text-white/70 text-xs">
                         Diseñado con orgullo en Colombia 🇨🇴
                     </p>
                 </div>
