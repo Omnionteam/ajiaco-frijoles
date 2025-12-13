@@ -29,9 +29,67 @@ export default function Hero() {
                     }`}
             ></div>
 
+            <div className="pointer-events-none absolute inset-0 z-0">
+                <span
+                    className="floating-ingredient absolute text-5xl"
+                    style={{
+                        left: '45%',
+                        top: '18%',
+                        animationDelay: '0.05s',
+                        ['--from-x' as any]: '-70vw',
+                        ['--from-y' as any]: '-20vh',
+                    }}
+                >
+                    🌽
+                </span>
+                <span
+                    className="floating-ingredient absolute text-4xl"
+                    style={{
+                        left: '58%',
+                        top: '22%',
+                        animationDelay: '0.15s',
+                        ['--from-x' as any]: '70vw',
+                        ['--from-y' as any]: '-25vh',
+                    }}
+                >
+                    🥕
+                </span>
+                <span
+                    className="floating-ingredient absolute text-3xl"
+                    style={{
+                        left: '42%',
+                        bottom: '20%',
+                        animationDelay: '0.25s',
+                        ['--from-x' as any]: '-60vw',
+                        ['--from-y' as any]: '40vh',
+                    }}
+                >
+                    🌿
+                </span>
+                <span
+                    className="floating-ingredient absolute text-5xl"
+                    style={{
+                        left: '62%',
+                        bottom: '18%',
+                        animationDelay: '0.3s',
+                        ['--from-x' as any]: '60vw',
+                        ['--from-y' as any]: '35vh',
+                    }}
+                >
+                    🍗
+                </span>
+            </div>
+
             <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 text-center">
                 {/* Main heading */}
-                <div className="mb-12 animate-fade-in-up">
+                <div
+                    className="mb-12 animate-liquid-once"
+                    style={{
+                        animationDelay: '0s',
+                        ['--from-x' as any]: '-60vw',
+                        ['--from-y' as any]: '-12vh',
+                    }}
+                >
                     <span className="block text-sm tracking-[0.3em] text-brand-yellow uppercase mb-4 font-medium">
                         Gastronomía Colombiana
                     </span>
@@ -42,12 +100,26 @@ export default function Hero() {
                 </div>
 
                 {/* Subtitle */}
-                <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto mb-12 font-light leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+                <p
+                    className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto mb-12 font-light leading-relaxed animate-liquid-once"
+                    style={{
+                        animationDelay: '0.2s',
+                        ['--from-x' as any]: '60vw',
+                        ['--from-y' as any]: '-10vh',
+                    }}
+                >
                     Una experiencia culinaria que honra la tradición de nuestros ancestros con la sofisticación de la cocina contemporánea.
                 </p>
 
                 {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+                <div
+                    className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-liquid-once"
+                    style={{
+                        animationDelay: '0.35s',
+                        ['--from-x' as any]: '0vw',
+                        ['--from-y' as any]: '30vh',
+                    }}
+                >
                     <a href="#historia" className="btn-primary">
                         Descubrir Historia
                     </a>
@@ -57,7 +129,14 @@ export default function Hero() {
                 </div>
 
                 {/* Stats - Minimalist */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-32 border-t border-white/20 pt-12 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+                <div
+                    className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-32 border-t border-white/20 pt-12 animate-liquid-once"
+                    style={{
+                        animationDelay: '0.5s',
+                        ['--from-x' as any]: '0vw',
+                        ['--from-y' as any]: '-30vh',
+                    }}
+                >
                     <div className="text-center">
                         <div className="text-4xl font-bold text-brand-yellow mb-1 font-serif">40+</div>
                         <p className="text-xs tracking-widest uppercase text-white/80">Años de Legado</p>

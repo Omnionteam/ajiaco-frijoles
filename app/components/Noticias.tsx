@@ -76,7 +76,10 @@ export default function Noticias() {
                 </div>
 
                 {/* Newsletter */}
-                <div className="bg-coffee-brown rounded-2xl p-12 md:p-20 text-center relative overflow-hidden">
+                <div
+                    className="rounded-2xl p-12 md:p-20 text-center relative overflow-hidden"
+                    style={{ backgroundColor: 'var(--brand-red)' }}
+                >
                     <div className="absolute inset-0 colombian-weave opacity-5"></div>
 
                     <div className="relative z-10 max-w-2xl mx-auto">
