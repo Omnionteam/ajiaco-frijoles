@@ -25,16 +25,16 @@ export default function Franquicias() {
     };
 
     return (
-        <section id="franquicias" className="py-32 relative overflow-hidden">
-            {/* Background Texture */}
-            <div className="absolute inset-0 colombian-weave opacity-50"></div>
+        <section id="franquicias" className="py-32 relative overflow-hidden" style={{ backgroundColor: 'var(--brand-red)' }}>
+            {/* Background Texture (very subtle to keep rojo vivo) */}
+            <div className="absolute inset-0 colombian-weave opacity-[0.03]"></div>
 
             <div className="relative z-10 max-w-7xl mx-auto px-6">
                 <div className="text-center mb-20">
-                    <span className="text-sm tracking-widest text-terracotta uppercase mb-2 block">Oportunidad de Negocio</span>
-                    <h2 className="section-header">Únete a la Familia</h2>
-                    <div className="decorative-line"></div>
-                    <p className="section-subtitle">
+                    <span className="text-sm tracking-widest text-brand-yellow uppercase mb-2 block">Oportunidad de Negocio</span>
+                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-serif">Únete a la Familia</h2>
+                    <div className="decorative-line bg-white/50"></div>
+                    <p className="text-lg text-white/90 max-w-2xl mx-auto">
                         Sea parte de la cadena de restaurantes de comida típica más exitosa del país.
                         Un modelo de negocio probado y rentable.
                     </p>
@@ -43,7 +43,7 @@ export default function Franquicias() {
                 <div className="grid lg:grid-cols-2 gap-16 items-start">
                     {/* Info Column */}
                     <div className="space-y-12">
-                        <div className="elegant-card bg-white">
+                        <div className="elegant-card bg-white/95">
                             <h3 className="text-2xl font-bold mb-8 text-coffee-brown font-serif">¿Por qué invertir?</h3>
 
                             <div className="space-y-8">

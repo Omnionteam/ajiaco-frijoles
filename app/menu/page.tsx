@@ -1,11 +1,51 @@
 'use client';
 
+import { useEffect, useState, useRef } from 'react';
+
 export default function Menu() {
+    const [showFade, setShowFade] = useState(false);
+    const [visible, setVisible] = useState(false);
+    const sectionRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const hero = document.getElementById('menu-hero');
+            if (!hero) return;
+
+            const trigger = hero.offsetHeight * 0.35;
+            setShowFade(window.scrollY > trigger);
+        };
+
+        handleScroll();
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    useEffect(() => {
+        const el = sectionRef.current;
+        if (!el) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    setVisible(entry.isIntersecting);
+                });
+            },
+            { threshold: 0.3 }
+        );
+
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <main className="bg-brand-gray min-h-screen">
+        <main ref={sectionRef} className="bg-brand-gray min-h-screen">
             {/* Page Header */}
-            <section className="relative py-24 bg-brand-red overflow-hidden">
+            <section id="menu-hero" className="relative py-32 md:py-36 bg-brand-red overflow-hidden">
                 <div className="absolute inset-0 colombian-weave opacity-10"></div>
+                <div
+                    className={`pointer-events-none absolute bottom-0 left-0 w-full h-28 bg-gradient-to-b from-transparent to-brand-gray transition-opacity duration-500 ${showFade ? 'opacity-100' : 'opacity-0'}`}
+                />
                 <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
                     <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 font-serif">Nuestro Menú</h1>
                     <p className="text-xl text-white/90 max-w-2xl mx-auto font-light">
@@ -15,12 +55,15 @@ export default function Menu() {
             </section>
 
             {/* Menu Content */}
-            <section className="py-20">
+            <section className="py-28 md:py-32">
                 <div className="max-w-6xl mx-auto px-6 space-y-24">
 
                     {/* El Ajiaco */}
                     <div className="flex flex-col lg:flex-row gap-12 items-center">
-                        <div className="lg:w-1/2">
+                        <div
+                            className={`lg:w-1/2 menu-fly ${visible ? 'menu-fly-in' : 'menu-fly-out'}`}
+                            style={{ ['--from-x' as any]: '-20vw', ['--from-y' as any]: '6vh' }}
+                        >
                             <div className="aspect-square rounded-full bg-brand-yellow/20 relative p-8">
                                 <div className="w-full h-full rounded-full bg-white shadow-2xl flex items-center justify-center overflow-hidden border-8 border-white">
                                     {/* Placeholder for Ajiaco Image */}
@@ -35,7 +78,10 @@ export default function Menu() {
                                 </div>
                             </div>
                         </div>
-                        <div className="lg:w-1/2 text-center lg:text-left">
+                        <div
+                            className={`lg:w-1/2 text-center lg:text-left menu-fly ${visible ? 'menu-fly-in' : 'menu-fly-out'}`}
+                            style={{ ['--from-x' as any]: '24vw', ['--from-y' as any]: '8vh' }}
+                        >
                             <span className="text-terracotta font-bold tracking-widest uppercase text-sm mb-2 block">Bogotá en un plato</span>
                             <h2 className="text-4xl md:text-5xl font-bold text-coffee-brown mb-6 font-serif">
                                 Ajiaco Santafereño
@@ -73,7 +119,10 @@ export default function Menu() {
 
                     {/* Los Frijoles */}
                     <div className="flex flex-col lg:flex-row-reverse gap-12 items-center">
-                        <div className="lg:w-1/2">
+                        <div
+                            className={`lg:w-1/2 menu-fly ${visible ? 'menu-fly-in' : 'menu-fly-out'}`}
+                            style={{ ['--from-x' as any]: '20vw', ['--from-y' as any]: '6vh' }}
+                        >
                             <div className="aspect-square rounded-full bg-terracotta/20 relative p-8">
                                 <div className="w-full h-full rounded-full bg-white shadow-2xl flex items-center justify-center overflow-hidden border-8 border-white">
                                     {/* Placeholder for Frijoles Image */}
@@ -84,7 +133,10 @@ export default function Menu() {
                                 </div>
                             </div>
                         </div>
-                        <div className="lg:w-1/2 text-center lg:text-left">
+                        <div
+                            className={`lg:w-1/2 text-center lg:text-left menu-fly ${visible ? 'menu-fly-in' : 'menu-fly-out'}`}
+                            style={{ ['--from-x' as any]: '-24vw', ['--from-y' as any]: '8vh' }}
+                        >
                             <span className="text-terracotta font-bold tracking-widest uppercase text-sm mb-2 block">Tradición Antioqueña</span>
                             <h2 className="text-4xl md:text-5xl font-bold text-coffee-brown mb-6 font-serif">
                                 Fríjoles con Garra

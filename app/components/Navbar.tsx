@@ -1,31 +1,60 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('inicio');
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const sectionIds = ['inicio', 'nosotros', 'menu', 'sedes', 'historia', 'franquicias', 'noticias'];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibles = entries.filter((entry) => entry.isIntersecting);
+        if (visibles.length) {
+          const top = visibles.reduce((prev, curr) => (curr.intersectionRatio > prev.intersectionRatio ? curr : prev));
+          setActiveSection(top.target.id);
+        }
+      },
+      { threshold: [0, 0.25, 0.4, 0.6, 0.75, 1] }
+    );
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
+  const redSections = new Set(['inicio', 'menu', 'sedes', 'franquicias']);
+  const isRedSection = redSections.has(activeSection);
+  const textClass = isRedSection ? 'text-white' : 'text-coffee-brown';
+  const linkHoverClass = isRedSection ? 'hover:text-brand-yellow' : 'hover:text-terracotta';
+  const buttonClasses = isRedSection
+    ? 'bg-white text-coffee-brown hover:bg-brand-yellow hover:text-coffee-brown'
+    : 'bg-brand-yellow text-coffee-brown hover:bg-coffee-brown hover:text-white';
+  const navStyle = {
+    backgroundColor: isRedSection ? 'rgba(210, 77, 62, 0.92)' : 'rgba(250, 247, 240, 0.95)',
+    backdropFilter: 'blur(12px)',
+  };
+
   const navLinks = [
-    { name: 'Inicio', href: '/' },
-    { name: 'Nosotros', href: '/nosotros' },
-    { name: 'Menú', href: '/menu' },
-    { name: 'Sedes', href: '/sedes' },
+    { name: 'Inicio', href: '/#inicio' },
+    { name: 'Nosotros', href: '/#nosotros' },
+    { name: 'Menú', href: '/#menu' },
+    { name: 'Sedes', href: '/#sedes' },
+    { name: 'Nuestra Historia', href: '/#historia' },
     { name: 'Franquicias', href: '/#franquicias' },
     { name: 'Noticias', href: '/#noticias' },
   ];
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-2' : 'bg-transparent py-6'}`}>
+    <nav
+      className="fixed w-full z-50 transition-all duration-300 shadow-sm py-3"
+      style={navStyle}
+    >
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex justify-between items-center">
           {/* Logo */}
@@ -37,7 +66,7 @@ export default function Navbar() {
                 className="w-full h-full object-contain drop-shadow-md"
               />
             </div>
-            <span className={`font-serif font-bold text-xl md:text-2xl tracking-tight transition-colors ${scrolled ? 'text-coffee-brown' : 'text-white'}`}>
+            <span className={`font-serif font-bold text-xl md:text-2xl tracking-tight transition-colors ${textClass}`}>
               Ajiaco <span className="text-brand-yellow">&</span> Frijoles
             </span>
           </Link>
@@ -48,7 +77,7 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`text-sm font-medium tracking-wide hover:text-brand-yellow transition-colors ${scrolled ? 'text-gray-600' : 'text-white/90'}`}
+                className={`text-sm font-medium tracking-wide transition-colors ${textClass} ${linkHoverClass}`}
               >
                 {link.name}
               </Link>
@@ -57,10 +86,7 @@ export default function Navbar() {
               href="https://wa.me/573171503273"
               target="_blank"
               rel="noopener noreferrer"
-              className={`px-6 py-2.5 rounded-full font-bold text-sm transition-all transform hover:-translate-y-0.5 hover:shadow-lg ${scrolled
-                  ? 'bg-brand-yellow text-coffee-brown hover:bg-coffee-brown hover:text-white'
-                  : 'bg-white text-coffee-brown hover:bg-brand-yellow hover:text-coffee-brown'
-                }`}
+              className={`px-6 py-2.5 rounded-full font-bold text-sm transition-all transform hover:-translate-y-0.5 hover:shadow-lg ${buttonClasses}`}
             >
               Pedir en Línea
             </a>
@@ -68,7 +94,7 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <button
-            className={`md:hidden p-2 rounded-lg transition-colors ${scrolled ? 'text-gray-800' : 'text-white'}`}
+            className={`md:hidden p-2 rounded-lg transition-colors ${textClass}`}
             onClick={() => setIsOpen(!isOpen)}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
