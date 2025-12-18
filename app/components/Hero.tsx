@@ -62,36 +62,9 @@ function MediaBlock({
 
 export default function Hero() {
   const [showFade, setShowFade] = useState(false);
-  const [videoIndex, setVideoIndex] = useState(0);
-  const [wordIndex, setWordIndex] = useState(0);
-  const [fontVariantIndex, setFontVariantIndex] = useState(0);
 
-  const videoSources = [
-    'https://hcyxhuvyqvtlvfsnrhjw.supabase.co/storage/v1/object/public/ajiaco%20y%20frijoles/contenido%20audiovisual/platanos%20olla.mp4',
-    'https://hcyxhuvyqvtlvfsnrhjw.supabase.co/storage/v1/object/public/ajiaco%20y%20frijoles/contenido%20audiovisual/logo%20cocina%20metal.mp4',
-    'https://hcyxhuvyqvtlvfsnrhjw.supabase.co/storage/v1/object/public/ajiaco%20y%20frijoles/contenido%20audiovisual/cortando%20platanos%202.mp4',
-    'https://hcyxhuvyqvtlvfsnrhjw.supabase.co/storage/v1/object/public/ajiaco%20y%20frijoles/contenido%20audiovisual/plato%20frijoles%202.mov',
-    'https://hcyxhuvyqvtlvfsnrhjw.supabase.co/storage/v1/object/public/ajiaco%20y%20frijoles/contenido%20audiovisual/cocineros%20cocina.mp4',
-  ];
-  const wordCycle = [
-    { text: 'Sabor', className: 'tracking-[0.08em]' },
-    { text: 'Tradición', className: 'tracking-[0.16em] uppercase' },
-    { text: 'Experiencias', className: 'tracking-[0.12em]' },
-    { text: 'Colombia', className: 'tracking-[0.14em]' },
-    { text: 'Ajiaco & Frijoles', className: 'tracking-[0.1em]' },
-  ];
-  const fontVariants = [
-    { className: 'text-3xl md:text-4xl font-serif italic' },
-    { className: 'text-3xl md:text-4xl font-serif font-semibold' },
-    { className: 'text-3xl md:text-4xl font-semibold italic' },
-    { className: 'text-3xl md:text-4xl font-serif' },
-    { className: 'text-3xl md:text-4xl font-serif uppercase tracking-[0.2em]' },
-    { className: 'text-3xl md:text-4xl font-semibold uppercase tracking-[0.18em]' },
-    { className: 'text-3xl md:text-4xl font-serif italic tracking-[0.22em]' },
-    { className: 'text-3xl md:text-4xl font-medium tracking-[0.24em]' },
-    { className: 'text-3xl md:text-4xl font-semibold tracking-[0.28em]' },
-    { className: 'text-3xl md:text-4xl font-serif font-bold tracking-[0.26em]' },
-  ];
+  const videoSource =
+    'https://hcyxhuvyqvtlvfsnrhjw.supabase.co/storage/v1/object/public/ajiaco%20y%20frijoles/contenido%20audiovisual/LOOP%20PAGINA%20INICIO.mp4';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -105,22 +78,6 @@ export default function Hero() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setVideoIndex((idx) => (idx + 1) % videoSources.length);
-      setWordIndex((idx) => (idx + 1) % wordCycle.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [videoSources.length, wordCycle.length]);
-
-  useEffect(() => {
-    setFontVariantIndex(0);
-    const fontInterval = setInterval(() => {
-      setFontVariantIndex((idx) => (idx + 1) % fontVariants.length);
-    }, 400);
-    return () => clearInterval(fontInterval);
-  }, [wordIndex, fontVariants.length]);
 
   return (
     <section
@@ -196,10 +153,12 @@ export default function Hero() {
               }}
             >
               <p className="text-xs tracking-[0.35em] text-brand-yellow/80 uppercase mb-4">Gastronomía Colombiana</p>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-                Ajiaco <span className="text-brand-yellow font-light">&</span> Frijoles
-              </h1>
-              <div className="decorative-line mt-6 bg-white/30"></div>
+              <div className="inline-flex flex-col items-center">
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+                  Ajiaco <span className="text-brand-yellow font-light">&</span> Frijoles
+                </h1>
+                <div className="decorative-line mt-6 bg-white/30 mb-0"></div>
+              </div>
             </div>
 
             <p
@@ -240,13 +199,10 @@ export default function Hero() {
             }}
           >
             <MediaBlock
-              label="Video destacado"
               colorFrom="#e0a14b"
               colorTo="#d0672c"
               className="w-full max-w-[520px] min-h-[380px]"
-              src={videoSources[videoIndex]}
-              overlayText={wordCycle[wordIndex].text}
-              overlayClass={`${fontVariants[fontVariantIndex].className} ${wordCycle[wordIndex].className}`}
+              src={videoSource}
             />
           </div>
         </div>

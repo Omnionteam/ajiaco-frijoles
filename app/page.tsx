@@ -5,6 +5,7 @@ import MenuSection from './components/MenuSection';
 import Historia from './components/Historia';
 import Franquicias from './components/Franquicias';
 import Noticias from './components/Noticias';
+import SedesMap from './components/SedesMap';
 import Footer from './components/Footer';
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
       <Hero />
       <NosotrosSection />
       <MenuSection />
+      <SedesMap />
       <Historia />
       <Franquicias />
       <Noticias />
