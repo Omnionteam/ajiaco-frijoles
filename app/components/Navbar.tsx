@@ -8,16 +8,16 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState('inicio');
 
   useEffect(() => {
-    const sectionIds = ['inicio', 'nosotros', 'menu', 'historia', 'franquicias', 'noticias'];
+    const sectionIds = ['inicio', 'nosotros', 'menu', 'sedes', 'historia', 'franquicias', 'noticias'];
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
+        const visibles = entries.filter((entry) => entry.isIntersecting);
+        if (visibles.length) {
+          const top = visibles.reduce((prev, curr) => (curr.intersectionRatio > prev.intersectionRatio ? curr : prev));
+          setActiveSection(top.target.id);
+        }
       },
-      { threshold: 0.4 }
+      { threshold: [0, 0.25, 0.4, 0.6, 0.75, 1] }
     );
 
     sectionIds.forEach((id) => {
@@ -28,7 +28,8 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
-  const isRedSection = activeSection === 'inicio' || activeSection === 'menu';
+  const redSections = new Set(['inicio', 'menu', 'sedes', 'franquicias']);
+  const isRedSection = redSections.has(activeSection);
   const textClass = isRedSection ? 'text-white' : 'text-coffee-brown';
   const linkHoverClass = isRedSection ? 'hover:text-brand-yellow' : 'hover:text-terracotta';
   const buttonClasses = isRedSection
@@ -40,10 +41,11 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { name: 'Inicio', href: '/' },
+    { name: 'Inicio', href: '/#inicio' },
     { name: 'Nosotros', href: '/#nosotros' },
     { name: 'Menú', href: '/#menu' },
-    { name: 'Sedes', href: '/sedes' },
+    { name: 'Sedes', href: '/#sedes' },
+    { name: 'Nuestra Historia', href: '/#historia' },
     { name: 'Franquicias', href: '/#franquicias' },
     { name: 'Noticias', href: '/#noticias' },
   ];

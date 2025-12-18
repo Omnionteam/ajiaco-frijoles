@@ -140,6 +140,42 @@ export default function Hero() {
         >
           🍗
         </span>
+        <span
+          className="floating-ingredient absolute text-4xl"
+          style={{
+            left: '32%',
+            top: '26%',
+            animationDelay: '0.4s',
+            ['--from-x' as any]: '-55vw',
+            ['--from-y' as any]: '-18vh',
+          }}
+        >
+          🍲
+        </span>
+        <span
+          className="floating-ingredient absolute text-4xl"
+          style={{
+            right: '18%',
+            top: '32%',
+            animationDelay: '0.55s',
+            ['--from-x' as any]: '58vw',
+            ['--from-y' as any]: '-22vh',
+          }}
+        >
+          🌽
+        </span>
+        <span
+          className="floating-ingredient absolute text-3xl"
+          style={{
+            left: '18%',
+            bottom: '20%',
+            animationDelay: '0.65s',
+            ['--from-x' as any]: '-48vw',
+            ['--from-y' as any]: '34vh',
+          }}
+        >
+          🥕
+        </span>
       </div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto space-y-14">

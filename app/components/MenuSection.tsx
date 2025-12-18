@@ -1,14 +1,44 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
+
 export default function MenuSection() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setVisible(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="menu"
       className="py-24 relative overflow-hidden min-h-screen flex items-center"
       style={{ backgroundColor: '#d24d3e' }}
     >
       <div className="relative max-w-7xl mx-auto px-6 w-full space-y-16">
-        <div className="text-center max-w-3xl mx-auto text-white">
+        <div
+          className={`text-center max-w-3xl mx-auto text-white ${
+            visible ? 'animate-liquid-once' : 'opacity-0'
+          }`}
+          style={{
+            ['--from-x' as any]: '0vw',
+            ['--from-y' as any]: '-14vh',
+            animationDuration: '1.4s',
+          }}
+        >
           <span className="text-sm tracking-widest uppercase mb-2 block text-brand-yellow">Nuestro Menú</span>
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">Dos platos, cero dudas</h2>
           <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto font-light">
@@ -18,7 +48,16 @@ export default function MenuSection() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-stretch">
-          <div className="elegant-card bg-white/95 h-full">
+          <div
+            className={`elegant-card bg-white/95 h-full ${
+              visible ? 'animate-liquid-once' : 'opacity-0'
+            }`}
+            style={{
+              ['--from-x' as any]: '-32vw',
+              ['--from-y' as any]: '10vh',
+              animationDuration: '1.4s',
+            }}
+          >
             <div className="flex flex-col gap-6 h-full">
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-full bg-brand-yellow/20 flex items-center justify-center text-3xl">🍲</div>
@@ -42,7 +81,17 @@ export default function MenuSection() {
             </div>
           </div>
 
-          <div className="elegant-card bg-white/95 h-full">
+          <div
+            className={`elegant-card bg-white/95 h-full ${
+              visible ? 'animate-liquid-once' : 'opacity-0'
+            }`}
+            style={{
+              ['--from-x' as any]: '32vw',
+              ['--from-y' as any]: '10vh',
+              animationDelay: '0.2s',
+              animationDuration: '1.4s',
+            }}
+          >
             <div className="flex flex-col gap-6 h-full">
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-full bg-terracotta/20 flex items-center justify-center text-3xl">🥘</div>

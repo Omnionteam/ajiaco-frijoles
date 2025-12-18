@@ -36,6 +36,19 @@ function PotIconContainer({ children }: PotIconContainerProps) {
                 }}
                 aria-hidden
             />
+            {/* Steam effect on hover */}
+            <span className="absolute inset-0 flex items-start justify-center pointer-events-none">
+                <span
+                    className="pot-steam absolute -top-3 left-1/2 -translate-x-1/2 w-4 h-4 bg-white/80 rounded-full blur-[1.5px]"
+                    style={{ animationDelay: '0s' }}
+                    aria-hidden
+                ></span>
+                <span
+                    className="pot-steam absolute -top-2 left-[42%] w-3 h-3 bg-white/70 rounded-full blur-[1.5px]"
+                    style={{ animationDelay: '0.35s' }}
+                    aria-hidden
+                ></span>
+            </span>
             <span className="relative z-10 text-white drop-shadow">{children}</span>
         </span>
     );
@@ -80,7 +93,7 @@ export default function Footer() {
                     </div>
 
                     <div>
-                        <h3 className="text-sm font-bold uppercase tracking-widest mb-6 text-terracotta">Explorar</h3>
+                        <h3 className="text-sm font-bold uppercase tracking-widest mb-6 text-brand-yellow">Explorar</h3>
                         <ul className="space-y-4">
                             <li><a href="#inicio" className="text-gray-300 hover:text-brand-yellow transition-colors">Inicio</a></li>
                             <li><a href="#historia" className="text-gray-300 hover:text-brand-yellow transition-colors">Historia</a></li>
@@ -90,7 +103,7 @@ export default function Footer() {
                     </div>
 
                     <div>
-                        <h3 className="text-sm font-bold uppercase tracking-widest mb-6 text-terracotta">Legal</h3>
+                        <h3 className="text-sm font-bold uppercase tracking-widest mb-6 text-brand-yellow">Legal</h3>
                         <ul className="space-y-4">
                             <li><a href="#" className="text-gray-300 hover:text-brand-yellow transition-colors">Términos y Condiciones</a></li>
                             <li><a href="#" className="text-gray-300 hover:text-brand-yellow transition-colors">Política de Privacidad</a></li>

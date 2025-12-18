@@ -216,7 +216,7 @@ html {
 }
 
 .animate-liquid-once {
-  animation: floatInLiquid 1.4s ease-out forwards;
+  animation: floatInLiquid 3.4s ease-out forwards;
 }
 
 @keyframes ingredientFloatIn {
@@ -238,7 +238,7 @@ html {
 }
 
 .floating-ingredient {
-  animation: ingredientFloatIn 1.8s ease-out forwards;
+  animation: ingredientFloatIn 4.8s ease-out forwards;
   opacity: 0;
   filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.15));
 }
@@ -261,4 +261,31 @@ html {
   transform: translate3d(var(--from-x, 0), var(--from-y, 0), 0);
   opacity: 0;
   filter: blur(6px);
+}
+
+
+/* Pot steam animation */
+@keyframes steamRise {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+  }
+  40% {
+    opacity: 0.9;
+    transform: translateY(-4px) scale(1.04);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-14px) scale(1.1);
+  }
+}
+
+.pot-steam {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.group:hover .pot-steam {
+  opacity: 1;
+  animation: steamRise 1.6s ease-in-out infinite;
 }
